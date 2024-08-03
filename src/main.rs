@@ -1,5 +1,8 @@
+use std::collections::HashMap;
+
 use fs_detect::FsEvent;
 
+mod config;
 mod fs_detect;
 mod fs_mount_and_init;
 

@@ -6,6 +6,8 @@ edition = "2021"
 [dependencies]
 anyhow = "1.0.86"
 futures-util = "0.3.30"
+serde = { version = "1.0.204", features = ["derive"] }
 tokio = { version = "1.39.2", features = ["full"] }
+toml = "0.8.19"
 zbus = { version = "4.4.0", features = ["tokio"], default-features = false }
 zvariant = "4.2.0"

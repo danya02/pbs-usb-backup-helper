@@ -4,6 +4,20 @@ use zbus::Connection;
 use zvariant::OwnedObjectPath;
 
 pub async fn mount_and_init(path: OwnedObjectPath) -> anyhow::Result<()> {
+    let mountpoint = mount(path).await?;
+
+    let config = crate::config::get_or_create_config(&mountpoint).await?;
+
+    if !config.do_backup {
+        println!("Skipping backup for {mountpoint} because do_backup is false");
+        return Ok(());
+    }
+
+    println!("TODO: Implement backup for {mountpoint}");
+    Ok(())
+}
+
+async fn mount(path: OwnedObjectPath) -> anyhow::Result<String> {
     println!("Mounting and initializing: {path:?}");
     let connection = Connection::system().await?;
 
@@ -24,5 +38,5 @@ pub async fn mount_and_init(path: OwnedObjectPath) -> anyhow::Result<()> {
 
     println!("Got mountpoint: {mountpoint:?}");
 
-    Ok(())
+    Ok(mountpoint)
 }
